@@ -1,0 +1,56 @@
+{
+  "name": "@exponencial/iso-remediacao",
+  "version": "0.1.0",
+  "description": "Agente de remediação ISO/IEC 27001 (A.8.8): roda npm audit no seu projeto e mantém sua conformidade viva na plataforma Exponencial — abre, fecha e evidencia vulnerabilidades automaticamente.",
+  "type": "module",
+  "bin": {
+    "iso-remediacao": "bin/cli.mjs"
+  },
+  "exports": {
+    ".": "./remediate.mjs"
+  },
+  "files": [
+    "bin/",
+    "remediate.mjs",
+    "SKILL.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node remediate.mjs"
+  },
+  "keywords": [
+    "iso-27001",
+    "iso27001",
+    "conformidade",
+    "compliance",
+    "seguranca",
+    "security",
+    "npm-audit",
+    "vulnerabilidades",
+    "vulnerability-management",
+    "sbom",
+    "agente-ia",
+    "ai-agent",
+    "claude",
+    "exponencial",
+    "sec-ai",
+    "lgpd"
+  ],
+  "homepage": "https://exponencialadm.net/pt-br/conformidade/",
+  "bugs": {
+    "url": "https://github.com/exponencialadm/iso-remediacao/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exponencialadm/iso-remediacao.git"
+  },
+  "author": "Exponencial Administração & Tecnologia <contato@exponencialadm.net> (https://exponencialadm.net)",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

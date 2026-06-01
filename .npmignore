@@ -1,0 +1,6 @@
+# Publicação enxuta: o package.json "files" já é a allowlist; isto reforça.
+.DS_Store
+*.log
+node_modules/
+.env
+.env.*

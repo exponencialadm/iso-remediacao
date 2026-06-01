@@ -1,3 +1,9 @@
 node_modules/
 *.tgz
 .DS_Store
+
+# Documentos internos do agente — NUNCA versionar/publicar.
+# Contêm caminhos de vault e processo interno; ficam só localmente.
+CLAUDE.md
+AGENTS.md
+PUBLICAR.md

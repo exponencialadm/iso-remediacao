@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 — 2026-06-01
+
+Republicação técnica, **sem mudança de código ou comportamento** em relação à 1.0.0.
+Reemite a *provenance* (OIDC Trusted Publishing) vinculada ao commit de origem atual.
+
 ## 1.0.0 — 2026-06-01
 
 Primeira versão pública estável do **agente de remediação ISO/IEC 27001** (controle

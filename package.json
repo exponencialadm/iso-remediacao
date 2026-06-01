@@ -1,6 +1,6 @@
 {
   "name": "@exponencial/iso-remediacao",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Agente de remediação ISO/IEC 27001 (A.8.8): roda npm audit no seu projeto e mantém sua conformidade viva na plataforma Exponencial — abre, fecha e evidencia vulnerabilidades automaticamente.",
   "type": "module",
   "bin": {

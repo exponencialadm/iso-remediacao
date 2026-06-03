@@ -1,6 +1,6 @@
 ---
 name: iso-remediacao
-description: "Agente de remediação ISO 27001 A.8.8 — roda npm audit no projeto atual, fecha vulnerabilidades resolvidas e registra pendências/evidências no painel de conformidade da Exponencial. Use quando o usuário pedir para verificar/remediar vulnerabilidades de dependências, rodar o loop de gestão de vulnerabilidades técnicas (A.8.8), ou sincronizar o npm audit com a conformidade ISO."
+description: "Agente de remediação ISO 27001 A.8.8 — roda npm audit no projeto atual, fecha vulnerabilidades resolvidas e registra pendências/evidências no painel de conformidade da Exponencial. Use quando o usuário pedir para verificar/remediar vulnerabilidades de dependências, rodar o loop de gestão de vulnerabilidades técnicas (A.8.8), sincronizar npm audit com a conformidade ISO, ou iniciar governança de agentes/skills/extensões."
 ---
 
 # iso-remediacao — Gestão de vulnerabilidades técnicas (ISO 27001 A.8.8)
@@ -10,6 +10,12 @@ da ISO/IEC 27001:2022 para a plataforma da Exponencial. Roda **dentro do projeto
 do cliente** (o diretório atual, que já tem `package.json`), confere as
 vulnerabilidades com `npm audit` e reconcilia com o registro de riscos da
 organização no `/adm`.
+
+Esta skill também serve como primeiro passo da governança de agentes de IA:
+um agente só deve atuar quando seu escopo, permissões e evidências são claros.
+Agentes, skills, MCPs e extensões de IDE devem entrar no inventário e na revisão
+de risco da empresa quando conseguem ler código, executar comandos, chamar rede
+ou acessar dados sensíveis.
 
 ## O que faz (loop A.8.8)
 

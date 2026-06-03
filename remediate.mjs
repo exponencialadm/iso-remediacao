@@ -28,6 +28,7 @@
 //   node remediate.mjs --auth-only     # só garante o token
 //   node remediate.mjs --dry-run       # mostra o plano, não escreve no /adm
 //   node remediate.mjs --scan-root <d> # (opcional) varre vários projetos sob <d>
+//   node remediate.mjs --help          # imprime ajuda e não escreve nada
 // Env:
 //   EXP_ADMIN_BASE   (default https://exponencialadm.net)
 //   EXP_AGENT_EMAIL  (opcional)              e-mail p/ o auto-registro (senão usa git config)
@@ -46,6 +47,21 @@ const BASE = (process.env.EXP_ADMIN_BASE || "https://exponencialadm.net").replac
 const argv = process.argv.slice(2);
 const ARGS = new Set(argv);
 const DRY = ARGS.has("--dry-run");
+if (ARGS.has("--help") || ARGS.has("-h")) {
+  console.log(`Uso:
+  npx @exponencial/iso-remediacao [opções]
+
+Opções:
+  --dry-run          Mostra o plano sem escrever no painel.
+  --connect          Conecta a uma conta existente via device flow.
+  --auth-only        Apenas garante a credencial do agente.
+  --scan-root <dir>  Varre vários projetos sob um diretório.
+  -h, --help         Mostra esta ajuda e não executa auditoria.
+
+Sem opções, o agente registra uma avaliação (se preciso), roda npm audit
+no projeto atual e sincroniza evidências ISO 27001 A.8.8 na plataforma.`);
+  process.exit(0);
+}
 // --scan-root <dir> opcional: varre vários projetos. Sem ele, audita o projeto do cwd.
 const scanRootIdx = argv.indexOf("--scan-root");
 const SCAN_ROOT = scanRootIdx >= 0 ? argv[scanRootIdx + 1] : null;

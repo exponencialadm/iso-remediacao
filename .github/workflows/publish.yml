@@ -3,56 +3,52 @@ name: publish
 # Publica @exponencial/iso-remediacao no npm via OIDC "Trusted Publishing".
 #
 # Segurança (por que este workflow é assim):
-#   - SEM token de longa duração. A identidade efêmera do job (OIDC) é trocada
+#   - Sem token de longa duração. A identidade efêmera do job (OIDC) é trocada
 #     por uma credencial de publish no instante da publicação; a procedência
 #     (provenance, "build attestation") é assinada automaticamente. Não há
 #     segredo a vazar do GitHub.
 #   - Menor privilégio: nenhum escopo por padrão; o job só pede id-token+contents.
-#   - Actions fixadas por SHA de commit (não por tag móvel) — tag pode ser
-#     reescrita; SHA não.
-#   - Gate humano: dispara só quando uma Release é publicada, e o environment
-#     "npm-publish" exige aprovação (required reviewer) antes de publicar.
+#   - Actions fixadas por SHA de commit (não por tag móvel).
+#   - Gate humano: dispara quando uma Release é publicada, e o environment
+#     "npm-publish" exige aprovação antes de publicar.
 #
-# Pré-requisito (uma vez, no site do npm): registrar o Trusted Publisher do
-# pacote apontando para este repositório e este arquivo de workflow. Ver
-# PUBLICAR.md. Enquanto não registrado, o passo de publish falha de propósito.
+# Pré-requisito: registrar no npm um Trusted Publisher para este pacote,
+# repositório, workflow filename "publish.yml" e environment "npm-publish".
 
 on:
   release:
-    types: [published]   # publica só quando uma Release é publicada (gate humano)
-  workflow_dispatch: {}  # disparo manual opcional (Actions > Run workflow)
+    types: [published]
+  workflow_dispatch:
 
-# Princípio do menor privilégio no nível do workflow: zero permissões.
 permissions: {}
 
-# Nunca duas publicações concorrentes.
 concurrency:
   group: npm-publish
   cancel-in-progress: false
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
-    environment: npm-publish   # ponto de aprovação (required reviewers no GitHub)
+    runs-on: ubuntu-24.04
+    environment: npm-publish
     permissions:
-      id-token: write          # OIDC: troca por credencial de publish efêmera
-      contents: read           # ler o repositório (checkout)
+      id-token: write
+      contents: read
     steps:
-      - name: Checkout (pin por SHA)
+      - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          persist-credentials: false   # não deixa o GITHUB_TOKEN no git config
+          persist-credentials: false
 
-      - name: Setup Node 22 (pin por SHA)
+      - name: Setup Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
 
-      - name: Atualiza npm (Trusted Publishing exige >= 11.5.1)
+      - name: Atualiza npm
         run: npm install -g npm@11.16.0
 
-      - name: Sanidade — versao do package bate com a tag da release
+      - name: Confere versão da release
         if: github.event_name == 'release'
         env:
           TAG: ${{ github.event.release.tag_name }}
@@ -63,12 +59,13 @@ jobs:
             echo "::error::package.json ($PKG_VERSION) != tag da release ($EXPECTED)"
             exit 1
           fi
-          echo "versao confere: $PKG_VERSION"
+          echo "versão confere: $PKG_VERSION"
 
-      - name: Auditoria do tarball (o que sera publicado)
-        run: npm pack --dry-run
+      - name: Valida pacote
+        run: |
+          node --check remediate.mjs
+          node bin/cli.mjs --help
+          npm pack --dry-run
 
-      - name: Publish (OIDC + provenance automatica)
-        # Sem NODE_AUTH_TOKEN: com id-token:write e npm >= 11.5.1 + Trusted
-        # Publisher registrado, o npm autentica via OIDC e gera a provenance.
+      - name: Publish
         run: npm publish --access public

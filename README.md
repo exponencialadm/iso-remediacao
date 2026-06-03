@@ -14,6 +14,11 @@ organização de avaliação** e já começa a trabalhar.
 > ISO/IEC 27001:2022, funcionando de verdade: detecção → tratamento → evidência,
 > em vez de uma política parada no papel.
 
+Também é uma porta de entrada para uma dor maior de segurança: **governança de
+agentes de IA, skills, extensões VS Code, MCPs e shadow AI**. Se um agente pode
+ler código, executar comandos ou chamar APIs, ele precisa entrar no inventário,
+na revisão de privilégio e na trilha de evidências da empresa.
+
 ---
 
 ## Instalação e uso
@@ -69,6 +74,25 @@ execuções são automáticas.
 | `… --connect` | Conecta a uma conta existente (aprovação do proprietário) |
 | `… --auth-only` | Apenas garante a credencial do agente |
 | `… --scan-root <dir>` | Varre vários projetos sob um diretório |
+| `… --help` | Mostra ajuda e não executa auditoria |
+
+## Por que isso importa para segurança de agentes
+
+Empresas estão adotando Claude Code, Cursor, OpenClaw e agentes similares antes
+de terem inventário e política claros. O resultado é uma pergunta difícil para
+TI, segurança e compliance:
+
+> Que agente está rodando, com quais skills, extensões e privilégios?
+
+Esta primeira skill resolve um caso bem delimitado:
+
+- roda dentro de um projeto npm;
+- usa escopo mínimo;
+- não altera dependências;
+- transforma uma verificação técnica em evidência ISO 27001 A.8.8.
+
+A mesma arquitetura pode evoluir para inventário de agentes, skills, MCPs e
+extensões VS Code, sempre separando descoberta, risco, aprovação e evidência.
 
 ### Variáveis de ambiente
 
@@ -101,4 +125,7 @@ tecnologia, certificada **ISO 9001, ISO 14001 e ISO 27001**.
 
 - Plataforma: <https://exponencialadm.net/pt-br/conformidade/>
 - Como instalar nos seus agentes: <https://exponencialadm.net/pt-br/instalar-agente/>
+- ISO 27001 A.8.8 + npm audit: <https://exponencialadm.net/pt-br/iso-27001-a-8-8-npm-audit/>
+- Governança de agentes de IA: <https://exponencialadm.net/pt-br/governanca-agentes-ia/>
+- Inventário de agentes, skills e extensões: <https://exponencialadm.net/pt-br/inventario-agentes-ia-skills-extensoes/>
 - Licença: [MIT](./LICENSE)

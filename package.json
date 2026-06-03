@@ -1,7 +1,7 @@
 {
   "name": "@exponencial/iso-remediacao",
-  "version": "1.0.1",
-  "description": "Agente de remediação ISO/IEC 27001 (A.8.8): roda npm audit no seu projeto e mantém sua conformidade viva na plataforma Exponencial — abre, fecha e evidencia vulnerabilidades automaticamente.",
+  "version": "1.0.2",
+  "description": "Agente de IA para ISO/IEC 27001 A.8.8: roda npm audit, evidencia vulnerabilidades e inicia governança de agentes na plataforma Exponencial.",
   "type": "module",
   "bin": {
     "iso-remediacao": "bin/cli.mjs"
@@ -33,15 +33,26 @@
     "npm-audit",
     "vulnerabilidades",
     "vulnerability-management",
+    "technical-vulnerability-management",
     "sbom",
+    "grc",
+    "ai-compliance",
+    "ai-governance",
+    "agent-governance",
+    "ai-agent-security",
     "agente-ia",
     "ai-agent",
+    "skills",
+    "vscode-extensions",
     "claude",
+    "cursor",
+    "openclaw",
     "exponencial",
     "sec-ai",
+    "iso42001",
     "lgpd"
   ],
-  "homepage": "https://exponencialadm.net/pt-br/conformidade/",
+  "homepage": "https://exponencialadm.net/pt-br/iso-27001-a-8-8-npm-audit/",
   "bugs": {
     "url": "https://github.com/exponencialadm/iso-remediacao/issues"
   },
